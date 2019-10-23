@@ -39,4 +39,5 @@ def stepRef=suiteRef.testCases["ReusableTestCase"].testSteps["ReusableClass"]
 stepRef.run(testRunner,context)
 def driver_Obj=context.obj1
 driver_Obj.displayMessage()
+
 </script></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
