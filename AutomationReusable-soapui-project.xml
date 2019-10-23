@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="e1be0fb1-0e6e-4ef9-bdd1-f5038de1e948" activeEnvironment="Default" name="AutomationReusable" soapui-version="5.4.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:testSuite id="e66cad44-f5bf-4564-8336-9a0736e068f1" name="ReusableFunctionLibrary"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="fc08030e-fcf9-4b71-a8ed-5b767b03875b" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="ReusableTestCase" searchProperties="true"><con:settings/><con:testStep type="groovy" name="ReusableClass" id="64bbb922-6f1c-48c1-899a-e05705c35a2d"><con:settings/><con:config><script>import com.eviware.soapui.support.XmlHolder
+import groovy.json.JsonSlurper
+
+class Reusable
+{
+def log
+def testRunner
+def context
+
+	def Reusable(log,testRunner,context)
+	{
+	this.log=log
+	this.testRunner=testRunner
+	this.context=context	
+	}
+	def displayMessage()
+	{
+	log.info "Hii First Method"	
+	}
+     def String XMLResponseValue(String ResponsePath,String Xpath)
+     {
+     	
+     	def xmlHolder=new XmlHolder(ResponsePath)
+     	return xmlHolder.getNodeValue(Xpath)
+     }
+     def String JSONResponse(String Respose,String JsonPath)
+     {
+     	def JsonSlurper_Obj=new JsonSlurper(Response)
+     	return JsonSlurper_Obj.parseText().JsonPath
+     	}
+
+}
+
+//def obj=new Reusable(log,testRunner,context)
+	context.setProperty("obj1",new Reusable(log,testRunner,context))
+	log.info context.obj1</script></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite id="faf1e92e-cc9d-4f16-b479-c2030b32bd3b" name="DriverSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="6663b34b-c030-4e4b-97e6-bfa103bae1bd" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="DriverTestCase" searchProperties="true"><con:settings/><con:testStep type="groovy" name="DriverGroovy" id="a05a2183-8f2e-47fa-bdfe-0b0a43a8553f"><con:settings/><con:config><script>def suiteRef=testRunner.testCase.testSuite.project.testSuites["ReusableFunctionLibrary"]
+def stepRef=suiteRef.testCases["ReusableTestCase"].testSteps["ReusableClass"]
+stepRef.run(testRunner,context)
+def driver_Obj=context.obj1
+driver_Obj.displayMessage()
+</script></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
